@@ -32,4 +32,38 @@ public class Corsaire extends Personnage {
     public boolean ramasser() {
         return false;
     }
+
+	public Item[] getInventaire() {
+		return inventaire;
+	}
+
+	public void setInventaire(Item[] inventaire) {
+		this.inventaire = inventaire;
+	}
+
+	public int getChance() {
+		return chance;
+	}
+
+	public void setChance(int chance) {
+		this.chance = chance;
+	}
+
+	public int getNumeroJoueur() {
+		return numeroJoueur;
+	}
+
+	public void setNumeroJoueur(int numeroJoueur) {
+		this.numeroJoueur = numeroJoueur;
+	}
+
+	public boolean isHaveChest() {
+		return haveChest;
+	}
+
+	public void setHaveChest(boolean haveChest) {
+		this.haveChest = haveChest;
+	}
+    
+    
 }
