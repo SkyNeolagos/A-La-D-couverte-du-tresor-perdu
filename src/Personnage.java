@@ -1,43 +1,79 @@
-public class Personnage {
+public abstract class Personnage {
     private int id;
     private int type;
     private int portee;
     private int pointDeplacement;
     private Case emplacement;
+    
 
-    public boolean combat() {
+    public Personnage(int id, int type, int portee, int pointDeplacement, Case emplacement) {
+		this.id = id;
+		this.type = type;
+		this.portee = portee;
+		this.pointDeplacement = pointDeplacement;
+		this.emplacement = emplacement;
+	}
+
+
+	public boolean combat() {
+		// A faire
         return false;
     }
 
-    public boolean depTop() {
-        return false;
+    public boolean deplacement(Case newPosition) {
+    	this.emplacement = newPosition;
+    	return true;
     }
 
-    public boolean depBot() {
-        return false;
-    }
 
-    public boolean depLeft() {
-        return false;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public boolean depRight() {
-        return false;
-    }
 
-    public boolean depTopLeft() {
-        return false;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public boolean depTopRight() {
-        return false;
-    }
 
-    public boolean depBotLeft() {
-        return false;
-    }
+	public int getType() {
+		return type;
+	}
 
-    public boolean depBotRight() {
-        return false;
-    }
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+
+	public int getPortee() {
+		return portee;
+	}
+
+
+	public void setPortee(int portee) {
+		this.portee = portee;
+	}
+
+
+	public int getPointDeplacement() {
+		return pointDeplacement;
+	}
+
+
+	public void setPointDeplacement(int pointDeplacement) {
+		this.pointDeplacement = pointDeplacement;
+	}
+
+
+	public Case getEmplacement() {
+		return emplacement;
+	}
+
+
+	public void setEmplacement(Case emplacement) {
+		this.emplacement = emplacement;
+	}
+    
+    
 }
