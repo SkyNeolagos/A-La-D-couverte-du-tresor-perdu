@@ -19,7 +19,13 @@ public class Corsaire extends Personnage {
 		//Changement de position Emplacement
     	this.setEmplacement(newPosition);
     	//Ramasser object
-    	
+    	if (newPosition.getItem() != null) {
+			for (int i = 0; i < inventaire.length; i++) {
+				if (inventaire[i].getType() == newPosition.getItem().getType()) {
+					// JE ME SUIS ARRETER LA 
+				}
+			}
+		}
     	//creuser si possible
     	//return true si un des 3
         return false;
