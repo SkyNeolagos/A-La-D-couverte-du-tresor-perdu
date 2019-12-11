@@ -1,3 +1,4 @@
+
 public class Corsaire extends Personnage {
     private Item[] inventaire;
     private int chance;
@@ -5,7 +6,7 @@ public class Corsaire extends Personnage {
     private boolean haveChest;
     
     
-
+    // --CONSTRUCTEUR--
     public Corsaire(int id, int type, int portee, int pointDeplacement, Case emplacement, Item[] inventaire, int chance,
 			int joueur, boolean haveChest) {
 		super(id, type, portee, pointDeplacement, emplacement);
@@ -14,21 +15,43 @@ public class Corsaire extends Personnage {
 		this.numeroJoueur = joueur;
 		this.haveChest = haveChest;
 	}
-
+    
+    // --DEPLACEMENT--
 	public boolean deplacement(Case newPosition) {
-		//Changement de position Emplacement
+		
+		// Changement de position
     	this.setEmplacement(newPosition);
-    	//Ramasser object
+    	
+    	// Ramasser object
     	if (newPosition.getItem() != null) {
-			for (int i = 0; i < inventaire.length; i++) {
+    		boolean possedeObject = false;
+    		// Parcours inventaire
+			for (int i = 0; i < inventaire.length; i++) { 
+				// Si objet dans inventaire = à objet trouvée
 				if (inventaire[i].getType() == newPosition.getItem().getType()) {
-					// JE ME SUIS ARRETER LA 
+					possedeObject = true;
+					break;
+				}
+			}
+			// Si il ne possede pas l'objet
+			if (possedeObject == false) { 
+				// Ajout de l'objet dans l'inventaire
+				inventaire[inventaire.length+1] = newPosition.getItem(); 
+			}
+		}
+    	// Creuser si possible
+    	if (!newPosition.isDig()) {
+    		for (int y = 0; y < inventaire.length; y++) {
+    			//Si il as une pelle
+				if (inventaire[y].getType() == 1 ) { 
+					dig();// la boucle a mettre dans la fonction dig() si on fais passer un argument a cette derniere
+					if(newPosition.isDig() && newPosition.isHaveChest()) {
+						// VICTOIRE
+					}
 				}
 			}
 		}
-    	//creuser si possible
-    	//return true si un des 3
-        return false;
+        return true;
     }
 
     public boolean dig() {
