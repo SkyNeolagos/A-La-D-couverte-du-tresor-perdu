@@ -1,4 +1,3 @@
-import org.jetbrains.annotations.NotNull;
 
 public class Plateau {
     private static int COTE;
@@ -132,15 +131,58 @@ public class Plateau {
         tmpCase=findRight(tmpCase);
         return tmpCase;
     }
-
-    public boolean verificationDeplacement(String evenement,Corsaire joueur){
-        switch(evenement){
-            case "top":
-                Case tmpCase = findTop(joueur.getEmplacement());
-                if(tmpCase==null){
+    private boolean verificationCase(Case caseAVerifier,Corsaire joueur){
+        if(caseAVerifier==null){
+            return false;
+        }
+        else{
+            if(caseAVerifier.getType()==1){
+                return false;
+            }
+            else if(caseAVerifier.getType()==0){
+                joueur.deplacement(caseAVerifier);
+                return true;
+            }
+            else{
+                if(caseAVerifier.getType()==2 && joueur.getInventaire()[1]!=null){
+                    joueur.deplacement(caseAVerifier);
+                    return  true;
+                }
+                else{
                     return false;
                 }
+            }
         }
-        return false;
+    }
+    private boolean verificationDeplacement(String evenement, Corsaire joueur){
+        Case tmpCase;
+        switch(evenement){
+            case "top":
+                tmpCase = findTop(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            case "bot":
+                tmpCase = findBot(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            case "left":
+                tmpCase = findLeft(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            case "right":
+                tmpCase = findRight(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            case "topLeft":
+                tmpCase = findTopLeft(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            case "topRight":
+                tmpCase = findTopRight(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            case "botLeft":
+                tmpCase = findBotLeft(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            case "botRight":
+                tmpCase = findBotRight(joueur.getEmplacement());
+                return verificationCase(tmpCase,joueur);
+            default:
+                return false;
+        }
     }
 }

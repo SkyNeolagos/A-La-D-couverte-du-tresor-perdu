@@ -1,6 +1,13 @@
 public class Main {
 	public static void main(String[] args) {
+		System.out.println("Hello World");
+		Case testCase = new Case(2, true, null, 3, 4);
+		testCase.affichage();
+		System.out.println();
+
 		//Test LOIC
+		System.out.println("-------------------");
+		System.out.println("-----Test Loic-----");
 		int cote=3;
 		Case[][] tableauCase = new Case[cote][cote];
 		Case tmpCase;
@@ -16,7 +23,7 @@ public class Main {
 		}
 		Plateau plateau=new Plateau(cote,tableauCase);
 		plateau.affichage();
-
+		System.out.println("-------------------");
 	}
 	
 	
