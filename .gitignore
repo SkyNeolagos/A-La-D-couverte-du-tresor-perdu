@@ -4,3 +4,10 @@ out
 bin
 .idea
 *.class
+*.class
+bin/Boucanier.class
+bin/Case.class
+bin/Corsaire.class
+bin/Flibustier.class
+bin/Personnage.class
+bin/Pirate.class

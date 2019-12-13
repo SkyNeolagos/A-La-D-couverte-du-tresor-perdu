@@ -22,20 +22,26 @@ public class Case {
     public void affichage() {
     	String motifCase = "O";
     	
-    	if(isDig) {
-    		if(type == 0) {
-    			System.out.print("X");
-    		} else if(type == 2) {
-    			System.out.println("T");
-    		}
+    	if(personnage == null) {
+	    	if(isDig) {
+	    		if(type == 0) {
+	    			System.out.print("X");
+	    		} else if(type == 2) {
+	    			System.out.println("T");
+	    		}
+	    	} else {
+	    		if(type == 2) {
+	        		System.out.println("F");
+	        	} else if(type == 1) {
+	        		System.out.println("E");
+	        	} else {
+	        		System.out.println("O");
+	        	}
+	    	}
     	} else {
-    		if(type == 2) {
-        		System.out.println("F");
-        	} else if(type == 1) {
-        		System.out.println("E");
-        	} else {
-        		System.out.println("O");
-        	}
+    		if(personnage instanceof Corsaire) {
+    			System.out.println();
+    		}
     	}
     	
     	
