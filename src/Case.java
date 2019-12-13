@@ -20,29 +20,37 @@ public class Case {
     }
     
     public void affichage() {
-    	String motifCase = "O";
+    	String motifCase = "$";
     	
     	if(personnage == null) {
 	    	if(isDig) {
 	    		if(type == 0) {
-	    			System.out.print("X");
+	    			motifCase = "X";
 	    		} else if(type == 2) {
-	    			System.out.println("T");
+	    			motifCase = "T";
 	    		}
 	    	} else {
 	    		if(type == 2) {
-	        		System.out.println("F");
+	    			motifCase = "F";
 	        	} else if(type == 1) {
-	        		System.out.println("E");
+	        		motifCase = "E";
 	        	} else {
-	        		System.out.println("O");
+	        		motifCase = "O";
 	        	}
 	    	}
     	} else {
     		if(personnage instanceof Corsaire) {
-    			System.out.println();
+    			motifCase = Integer.toString((((Corsaire) personnage).getNumeroJoueur()));
     		}
+    		else if (personnage instanceof Boucanier) {
+				motifCase = "B";
+			}
+    		else if (personnage instanceof Flibustier) {
+				motifCase = "P";
+			}
     	}
+    	
+    	System.out.print(motifCase);;
     	
     	
     }
