@@ -27,7 +27,7 @@ public class Corsaire extends Personnage {
     		boolean possedeObject = false;
     		// Parcours inventaire
 			for (int i = 0; i < inventaire.length; i++) { 
-				// Si objet dans inventaire = à objet trouvée
+				// Si objet dans inventaire = ï¿½ objet trouvï¿½e
 				if (inventaire[i].getType() == newPosition.getItem().getType()) {
 					possedeObject = true;
 					break;
