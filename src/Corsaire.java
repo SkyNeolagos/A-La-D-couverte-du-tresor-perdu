@@ -16,6 +16,17 @@ public class Corsaire extends Personnage {
 		this.haveChest = haveChest;
 	}
     
+    // COUCOU MIKA, KDO c'est pour toi
+    
+    public void addItem(Item item) {
+		// Faut ajouter l'item a l'inventaire au bon emplacement.
+    	// Genre
+    	
+    	this.inventaire[item.getType()] = item;
+    	
+    	// En faite je crois que c'est carrement ca enfaite
+	}
+    
     // --DEPLACEMENT--
 	public boolean deplacement(Case newPosition) {
 		
