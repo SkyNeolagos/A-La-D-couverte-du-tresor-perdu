@@ -1,14 +1,12 @@
 public class Item {
-    private int id;
     private int type;
     private String nomItem;
     
-	public int getId() {
-		return id;
+    public Item(int type, String nom) {
+		this.type = type;
+		this.nomItem = nom;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+ 
 	public int getType() {
 		return type;
 	}
@@ -18,7 +16,7 @@ public class Item {
 	public String getNomItem() {
 		return nomItem;
 	}
-	public void setNomItem(String nomIteme) {
+	protected void setNomItem(String nomIteme) {
 		this.nomItem = nomIteme;
 	} 
 	

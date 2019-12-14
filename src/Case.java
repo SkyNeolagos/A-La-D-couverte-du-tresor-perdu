@@ -57,8 +57,8 @@ public class Case {
     
     public String ramasserItem(Corsaire joueur) { 
     	if (this.item != null) {
-    		int idItem = this.item.getId();
-    		if (joueur.getInventaire()[idItem] == null) {
+    		int typeItem = this.item.getType();
+    		if (joueur.getInventaire()[typeItem] == null) {
     			joueur.addItem(this.item);
     			String nomItem = this.item.getNomItem();
     			this.item = null;
