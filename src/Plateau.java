@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Plateau {
     private static int COTE;
@@ -5,12 +6,12 @@ public class Plateau {
     private Corsaire[] tableauJoueur;
     private Pirate[] tableauPirate;
 
-    public Plateau(int cote,Case[][] tableauCase) {
+    Plateau(int cote, Case[][] tableauCase) {
         COTE=cote;
         this.tableauCase = tableauCase;
     }
 
-    public void affichage() {
+    void affichage() {
         for(int i=0; i<COTE; i++)
         {
             for(int j=0; j<COTE; j++)
@@ -37,8 +38,64 @@ public class Plateau {
         return plateau;
     }
 
-    public Plateau initialiser(Plateau plateau) {
-        return plateau;
+    public Plateau initialiser(Plateau plateau) { return plateau; }
+
+    Case [][] generatePlateauWithoutItem(int cote){
+        Case [][] plateauWithoutItem=new Case[cote][cote];
+        int nombreCaseTotal=cote*cote;
+        int nombreCaseEauRestante=((nombreCaseTotal*5)/100);
+        int nombreCaseForetRestante=((nombreCaseTotal*5)/100);
+        int nombreCaseNormalRestante=nombreCaseTotal-(nombreCaseEauRestante+nombreCaseForetRestante);
+        Random random=new Random();
+        for (int i = 0; i < cote; i++) {
+            for (int j = 0; j < cote; j++) {
+                if(nombreCaseEauRestante==0 && nombreCaseForetRestante==0){
+                    plateauWithoutItem[i][j]=new Case(0,false,null,i,j);
+                    nombreCaseNormalRestante--;
+                }
+                else if(nombreCaseNormalRestante==0){
+                    boolean loop=true;
+                    while(loop){
+                        int randomNumberType=random.nextInt(2);
+                        if(randomNumberType==0 && nombreCaseEauRestante != 0){
+                            plateauWithoutItem[i][j]=new Case(1,false,null,i,j);
+                            nombreCaseEauRestante--;
+                            loop=false;
+                        }
+                        else if(randomNumberType==1 && nombreCaseForetRestante != 0){
+                            plateauWithoutItem[i][j]=new Case(2,false,null,i,j);
+                            nombreCaseForetRestante--;
+                            loop=false;
+                        }
+                    }
+
+                }
+                else if(nombreCaseNormalRestante !=0){
+                    boolean loop=true;
+                    while(loop){
+                        int randomNumberType=random.nextInt(20);
+                        if(randomNumberType==1 && nombreCaseEauRestante != 0){
+                            plateauWithoutItem[i][j]=new Case(1,false,null,i,j);
+                            nombreCaseEauRestante--;
+                            loop=false;
+                        }
+                        else if(randomNumberType==2 && nombreCaseForetRestante !=0){
+                            plateauWithoutItem[i][j]=new Case(2,false,null,i,j);
+                            nombreCaseForetRestante--;
+                            loop=false;
+                        }
+                        else if(randomNumberType!=1 && randomNumberType !=2) {
+                            plateauWithoutItem[i][j] = new Case(0,false,null,i,j);
+                            nombreCaseNormalRestante--;
+                            loop = false;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        return plateauWithoutItem;
     }
 
     private Case find(int x,int y){
@@ -184,5 +241,37 @@ public class Plateau {
             default:
                 return false;
         }
+    }
+
+    public static int getCOTE() {
+        return COTE;
+    }
+
+    public static void setCOTE(int COTE) {
+        Plateau.COTE = COTE;
+    }
+
+    public Case[][] getTableauCase() {
+        return tableauCase;
+    }
+
+    public void setTableauCase(Case[][] tableauCase) {
+        this.tableauCase = tableauCase;
+    }
+
+    public Corsaire[] getTableauJoueur() {
+        return tableauJoueur;
+    }
+
+    public void setTableauJoueur(Corsaire[] tableauJoueur) {
+        this.tableauJoueur = tableauJoueur;
+    }
+
+    public Pirate[] getTableauPirate() {
+        return tableauPirate;
+    }
+
+    public void setTableauPirate(Pirate[] tableauPirate) {
+        this.tableauPirate = tableauPirate;
     }
 }
