@@ -1,19 +1,20 @@
+import java.util.Random;
 
 public class Plateau {
-    private static int COTE;
+    private int cote;
     private Case[][] tableauCase;
     private Corsaire[] tableauJoueur;
     private Pirate[] tableauPirate;
 
-    public Plateau(int cote,Case[][] tableauCase) {
-        COTE=cote;
+    Plateau(int cote, Case[][] tableauCase) {
+        this.cote=cote;
         this.tableauCase = tableauCase;
     }
 
-    public void affichage() {
-        for(int i=0; i<COTE; i++)
+    void affichage() {
+        for(int i=0; i<cote; i++)
         {
-            for(int j=0; j<COTE; j++)
+            for(int j=0; j<cote; j++)
             {
                 tableauCase[i][j].affichage();
             }
@@ -37,100 +38,68 @@ public class Plateau {
         return plateau;
     }
 
-    public Plateau initialiser(Plateau plateau) {
-        return plateau;
-    }
+    public Plateau initialiser(Plateau plateau) { return plateau; }
 
-    private Case find(int x,int y){
-        if((x<0 || y<0) || (x>COTE || y>COTE)){
-            return null;
-        }
-        else{
-            for (int i = 0; i < COTE; i++) {
-                for (int j = 0; j < COTE ; j++) {
-                    Case tmpCase=tableauCase[i][j];
-                    if(tmpCase!=null) {
-                        if (tmpCase.getX() == x && tmpCase.getY() == y) {
-                            return tmpCase;
+    Case [][] generatePlateauWithoutItem(int cote){
+        Case [][] plateauWithoutItem=new Case[cote][cote];
+        int nombreCaseTotal=cote*cote;
+        int nombreCaseEauRestante=((nombreCaseTotal*5)/100);
+        int nombreCaseForetRestante=((nombreCaseTotal*5)/100);
+        int nombreCaseNormalRestante=nombreCaseTotal-(nombreCaseEauRestante+nombreCaseForetRestante);
+        Random random=new Random();
+        for (int i = 0; i < cote; i++) {
+            for (int j = 0; j < cote; j++) {
+                if(nombreCaseEauRestante==0 && nombreCaseForetRestante==0){
+                    plateauWithoutItem[i][j]=new Case(0,false,null,i,j);
+                    nombreCaseNormalRestante--;
+                }
+                else if(nombreCaseNormalRestante==0){
+                    boolean loop=true;
+                    while(loop){
+                        int randomNumberType=random.nextInt(2);
+                        if(randomNumberType==0 && nombreCaseEauRestante != 0){
+                            plateauWithoutItem[i][j]=new Case(1,false,null,i,j);
+                            nombreCaseEauRestante--;
+                            loop=false;
+                        }
+                        else if(randomNumberType==1 && nombreCaseForetRestante != 0){
+                            plateauWithoutItem[i][j]=new Case(2,false,null,i,j);
+                            nombreCaseForetRestante--;
+                            loop=false;
                         }
                     }
+
                 }
-            }
-            return null;
-        }
-    }
-    private Case findTop(Case positionActuelle){
-        if(positionActuelle!=null){
-            int tmpX=positionActuelle.getX()-1;
-            int tmpY=positionActuelle.getY();
-            if(tmpX<0 || tmpX >COTE){
-                return null;
-            }
-            else{
-                return find(tmpX,tmpY);
-            }
-        }
-        return null;
-    }
-    private Case findBot(Case positionActuelle){
-        if(positionActuelle!=null){
-            int tmpX=positionActuelle.getX()+1;
-            int tmpY=positionActuelle.getY();
-            if(tmpX<0 || tmpX >COTE){
-                return null;
-            }
-            else{
-                return find(tmpX,tmpY);
+                else if(nombreCaseNormalRestante !=0){
+                    boolean loop=true;
+                    while(loop){
+                        int randomNumberType=random.nextInt(20);
+                        if(randomNumberType==1 && nombreCaseEauRestante != 0){
+                            plateauWithoutItem[i][j]=new Case(1,false,null,i,j);
+                            nombreCaseEauRestante--;
+                            loop=false;
+                        }
+                        else if(randomNumberType==2 && nombreCaseForetRestante !=0){
+                            plateauWithoutItem[i][j]=new Case(2,false,null,i,j);
+                            nombreCaseForetRestante--;
+                            loop=false;
+                        }
+                        else if(randomNumberType!=1 && randomNumberType !=2) {
+                            plateauWithoutItem[i][j] = new Case(0,false,null,i,j);
+                            nombreCaseNormalRestante--;
+                            loop = false;
+                        }
+                    }
+
+                }
+
             }
         }
-        return null;
+        return plateauWithoutItem;
     }
-    private Case findRight(Case positionActuelle){
-        if(positionActuelle!=null){
-            int tmpX=positionActuelle.getX();
-            int tmpY=positionActuelle.getY()+1;
-            if(tmpY<0 || tmpY >COTE){
-                return null;
-            }
-            else{
-                return find(tmpX,tmpY);
-            }
-        }
-        return null;
-    }
-    private Case findLeft(Case positionActuelle){
-        if(positionActuelle!=null){
-            int tmpX=positionActuelle.getX();
-            int tmpY=positionActuelle.getY()-1;
-            if(tmpY<0 || tmpY >COTE){
-                return null;
-            }
-            else{
-                return find(tmpX,tmpY);
-            }
-        }
-        return null;
-    }
-    private Case findTopLeft(Case positionActuelle){
-        Case tmpCase=findTop(positionActuelle);
-        tmpCase=findLeft(tmpCase);
-        return tmpCase;
-    }
-    private Case findTopRight(Case positionActuelle){
-        Case tmpCase=findTop(positionActuelle);
-        tmpCase=findRight(tmpCase);
-        return tmpCase;
-    }
-    private Case findBotLeft(Case positionActuelle){
-        Case tmpCase=findBot(positionActuelle);
-        tmpCase=findLeft(tmpCase);
-        return tmpCase;
-    }
-    private Case findBotRight(Case positionActuelle){
-        Case tmpCase=findBot(positionActuelle);
-        tmpCase=findRight(tmpCase);
-        return tmpCase;
-    }
+
+
+
     private boolean verificationCase(Case caseAVerifier,Corsaire joueur){
         if(caseAVerifier==null){
             return false;
@@ -156,33 +125,59 @@ public class Plateau {
     }
     private boolean verificationDeplacement(String evenement, Corsaire joueur){
         Case tmpCase;
+        Recherche recherche=new Recherche();
         switch(evenement){
             case "top":
-                tmpCase = findTop(joueur.getEmplacement());
+                tmpCase = recherche.findTop(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "bot":
-                tmpCase = findBot(joueur.getEmplacement());
+                tmpCase = recherche.findBot(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "left":
-                tmpCase = findLeft(joueur.getEmplacement());
+                tmpCase = recherche.findLeft(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "right":
-                tmpCase = findRight(joueur.getEmplacement());
+                tmpCase = recherche.findRight(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "topLeft":
-                tmpCase = findTopLeft(joueur.getEmplacement());
+                tmpCase = recherche.findTopLeft(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "topRight":
-                tmpCase = findTopRight(joueur.getEmplacement());
+                tmpCase = recherche.findTopRight(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "botLeft":
-                tmpCase = findBotLeft(joueur.getEmplacement());
+                tmpCase = recherche.findBotLeft(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "botRight":
-                tmpCase = findBotRight(joueur.getEmplacement());
+                tmpCase = recherche.findBotRight(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             default:
                 return false;
         }
+    }
+
+    public int getCote() {
+        return cote;
+    }
+    public  void setCote(int cote) {
+        this.cote = cote;
+    }
+    public Case[][] getTableauCase() {
+        return tableauCase;
+    }
+    public void setTableauCase(Case[][] tableauCase) {
+        this.tableauCase = tableauCase;
+    }
+    public Corsaire[] getTableauJoueur() {
+        return tableauJoueur;
+    }
+    public void setTableauJoueur(Corsaire[] tableauJoueur) {
+        this.tableauJoueur = tableauJoueur;
+    }
+    public Pirate[] getTableauPirate() {
+        return tableauPirate;
+    }
+    public void setTableauPirate(Pirate[] tableauPirate) {
+        this.tableauPirate = tableauPirate;
     }
 }
