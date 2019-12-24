@@ -6,9 +6,8 @@ public class Plateau {
     private Corsaire[] tableauJoueur;
     private Pirate[] tableauPirate;
 
-    Plateau(int cote, Case[][] tableauCase) {
+    Plateau(int cote) {
         this.cote=cote;
-        this.tableauCase = tableauCase;
     }
 
     void affichage() {
@@ -40,7 +39,7 @@ public class Plateau {
 
     public Plateau initialiser(Plateau plateau) { return plateau; }
 
-    Case [][] generatePlateauWithoutItem(int cote){
+    Case [][] generatePlateauWithoutItem(){
         Case [][] plateauWithoutItem=new Case[cote][cote];
         int nombreCaseTotal=cote*cote;
         int nombreCaseEauRestante=((nombreCaseTotal*5)/100);
@@ -97,7 +96,49 @@ public class Plateau {
         }
         return plateauWithoutItem;
     }
-
+    public void generateItemIntoPlateau(int nbJoueur){
+        int nombreItemPelleRestante=nbJoueur;
+        int nombreItemMachetteRestante=2*nbJoueur;
+        int nombreItemMousquetRestante=2*nbJoueur;
+        int nombreItemArmureRestante=2*nbJoueur;
+        Random random=new Random();
+        int nombreItemTotal=nombreItemArmureRestante+nombreItemMachetteRestante+nombreItemMousquetRestante+nombreItemPelleRestante;
+        while(nombreItemTotal !=0){
+            for (int i = 0; i < cote ; i++) {
+                for (int j = 0; j < cote; j++) {
+                    int randomNumberItem=random.nextInt(10);
+                    if(randomNumberItem==0 && nombreItemPelleRestante !=0 && tableauCase[i][j].getType() !=1){
+                        if(tableauCase[i][j].getItem()==null){
+                            tableauCase[i][j].setItem(new Pelle());
+                            nombreItemPelleRestante--;
+                            nombreItemTotal--;
+                        }
+                    }
+                    else if(randomNumberItem==1 && nombreItemMachetteRestante !=0 && tableauCase[i][j].getType() !=1 && tableauCase[i][j].getType() !=2){
+                        if(tableauCase[i][j].getItem()==null){
+                            tableauCase[i][j].setItem(new Machette());
+                            nombreItemMachetteRestante--;
+                            nombreItemTotal--;
+                        }
+                    }
+                    else if(randomNumberItem==2 && nombreItemMousquetRestante !=0 && tableauCase[i][j].getType()!=1){
+                        if (tableauCase[i][j].getItem()==null){
+                            tableauCase[i][j].setItem(new Mousquet());
+                            nombreItemMousquetRestante--;
+                            nombreItemTotal--;
+                        }
+                    }
+                    else if(randomNumberItem==3 && nombreItemArmureRestante !=0 && tableauCase[i][j].getType()!=1){
+                        if (tableauCase[i][j].getItem()==null){
+                            tableauCase[i][j].setItem(new Armure());
+                            nombreItemArmureRestante--;
+                            nombreItemTotal--;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
     private boolean verificationCase(Case caseAVerifier,Corsaire joueur){

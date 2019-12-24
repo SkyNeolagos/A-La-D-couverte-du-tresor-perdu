@@ -6,14 +6,29 @@ public class Main {
 		System.out.println();
 
 		//Test LOIC
+
+        Case[][] tableauCase;
+        int cote=6;
 		System.out.println("-------------------");
 		System.out.println("-----Test Loic-----");
-        Case[][] tableauCase=new Case[5][5];
-        int cote=5;
-		Plateau plateau=new Plateau(cote,tableauCase);
-        plateau.setTableauCase(plateau.generatePlateauWithoutItem(cote));
-        plateau.affichage();
-        System.out.println("-------------------");
+		Plateau plateau=new Plateau(cote);
+		plateau.setCote(cote);
+		plateau.setTableauCase(plateau.generatePlateauWithoutItem());
+		plateau.generateItemIntoPlateau(4);
+		plateau.affichage();
+		System.out.println("-------------------");
+		for (int i = 0; i <cote ; i++) {
+			for (int j = 0; j <cote ; j++) {
+				if(plateau.getTableauCase()[i][j].getItem()!=null){
+					System.out.print(plateau.getTableauCase()[i][j].getItem().getType());
+				}
+				else{
+					System.out.print(4);
+				}
+			}
+			System.out.println();
+		}
+		System.out.println("-------------------");
 	}
 	
 	
