@@ -14,7 +14,10 @@ public class Main {
 		Plateau plateau=new Plateau(cote);
 		plateau.setCote(cote);
 		plateau.setTableauCase(plateau.generatePlateauWithoutItem());
-		plateau.generateItemIntoPlateau(4);
+		plateau.generatePelleIntoPlateau(4);
+		plateau.generateMachetteIntoPlateau(4);
+		plateau.generateMousquetIntoPlateau(4);
+		plateau.generateArmureIntoPlateau(4);
 		plateau.affichage();
 		System.out.println("-------------------");
 		for (int i = 0; i <cote ; i++) {
