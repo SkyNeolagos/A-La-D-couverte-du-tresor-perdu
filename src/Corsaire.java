@@ -15,6 +15,7 @@ public class Corsaire extends Personnage {
 		this.numeroJoueur = joueur;
 		this.haveChest = haveChest;
 	}
+	public Corsaire(){}
     
     // COUCOU MIKA, KDO c'est pour toi
     

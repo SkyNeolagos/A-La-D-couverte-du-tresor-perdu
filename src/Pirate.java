@@ -3,7 +3,7 @@ public class Pirate extends Personnage {
 		super(id, type, portee, pointDeplacement, emplacement);
 		
 	}
-
+    public Pirate(){}
 	public boolean depAlea() {
         return false;
     }

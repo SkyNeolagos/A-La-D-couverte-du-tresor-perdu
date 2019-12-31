@@ -49,6 +49,8 @@ public class Plateau {
         generator.generateMousquetIntoPlateau(nbJoueur,this);
         generator.generateJoueurIntoPlateau(nbJoueur,this);
         generator.generateChestIntoPlateau(this);
+        generator.generateFlibustierIntoPlateau(nbJoueur,this);
+        generator.generateBoucanierIntoPlateau(nbJoueur,this);
     }
 
     Case [][] generatePlateauWithoutItem(){
