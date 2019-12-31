@@ -40,7 +40,8 @@ public class Case {
 	    	}
     	} else {
     		if(personnage instanceof Corsaire) {
-    			motifCase = Integer.toString((((Corsaire) personnage).getNumeroJoueur()));
+    			//motifCase = Integer.toString((((Corsaire) personnage).getNumeroJoueur()));
+				motifCase="C";
     		}
     		else if (personnage instanceof Boucanier) {
 				motifCase = "B";

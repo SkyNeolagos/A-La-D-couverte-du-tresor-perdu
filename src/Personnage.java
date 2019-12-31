@@ -13,6 +13,8 @@ public abstract class Personnage {
 		this.pointDeplacement = pointDeplacement;
 		this.emplacement = emplacement;
 	}
+	public Personnage(){
+	};
 
 
 	public boolean combat() {
