@@ -8,12 +8,14 @@ public class Plateau {
     private Case[][] tableauCase;
     private Corsaire[] tableauJoueur;
     private Pirate[] tableauPirate;
+    private Generator generator;
 
     Plateau(int cote) {
         this.cote=cote;
         int nombreCaseTotal=cote*cote;
         this.nombreCaseEau=((5*nombreCaseTotal)/100);
         this.nombreCaseForet=((5*nombreCaseTotal)/100);
+        tableauCase=generatePlateauWithoutItem();
     }
 
     void affichage() {
@@ -30,20 +32,24 @@ public class Plateau {
     public boolean sauvegarde() {
         return false;
     }
-
     public Plateau tourJoueur(Plateau plateau) {
         return plateau;
     }
-
     public Plateau tourPirate(Plateau plateau) {
         return plateau;
     }
-
     public Plateau charger(Plateau plateau) {
         return plateau;
     }
-
-    public Plateau initialiser(Plateau plateau) { return plateau; }
+    public void initialiser(int nbJoueur) {
+        generator=new Generator();
+        generator.generatePelleIntoPlateau(nbJoueur,this);
+        generator.generateArmureIntoPlateau(nbJoueur,this);
+        generator.generateMachetteIntoPlateau(nbJoueur,this);
+        generator.generateMousquetIntoPlateau(nbJoueur,this);
+        generator.generateJoueurIntoPlateau(nbJoueur,this);
+        generator.generateChestIntoPlateau(this);
+    }
 
     Case [][] generatePlateauWithoutItem(){
         Case [][] plateauWithoutItem=new Case[cote][cote];
@@ -102,103 +108,7 @@ public class Plateau {
         }
         return plateauWithoutItem;
     }
-    public void generatePelleIntoPlateau(int nbJoueur){
-        int nombrePelleRestante=nbJoueur;
-        Random random=new Random();
-        while(nombrePelleRestante!=0){
-            for (int i = 0; i < cote ; i++) {
-                for (int j = 0; j < cote; j++) {
-                    int randomNumberItem=random.nextInt(cote*cote);
-                    if(randomNumberItem >=0 && randomNumberItem<=nbJoueur-1 && nombrePelleRestante !=0 && tableauCase[i][j].getType() !=1){
-                        if(tableauCase[i][j].getItem()==null){
-                            tableauCase[i][j].setItem(new Pelle());
-                            nombrePelleRestante--;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void generateMachetteIntoPlateau(int nbJoueur){
-        int nombreMachetteRestante=2*nbJoueur;
-        Random random=new Random();
-        while(nombreMachetteRestante !=0){
-            for (int i = 0; i < cote; i++) {
-                for (int j = 0; j < cote; j++) {
-                    int randomNumberItem=random.nextInt(cote*cote);
-                    if (randomNumberItem >=0 && randomNumberItem<=nbJoueur*2-1 && nombreMachetteRestante !=0 && tableauCase[i][j].getType() !=1 && tableauCase[i][j].getType() != 2){
-                        if (tableauCase[i][j].getItem()==null){
-                            tableauCase[i][j].setItem(new Machette());
-                            nombreMachetteRestante--;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void generateMousquetIntoPlateau(int nbJoueur){
-        int nombreMousquetRestante=2*nbJoueur;
-        Random random=new Random();
-        while(nombreMousquetRestante !=0){
-            for (int i = 0; i < cote; i++) {
-                for (int j = 0; j < cote; j++) {
-                    int randomNumberItem=random.nextInt(cote*cote);
-                    if (randomNumberItem >=0 && randomNumberItem<=nbJoueur*2-1 && nombreMousquetRestante !=0 && tableauCase[i][j].getType() !=1){
-                        if (tableauCase[i][j].getItem()==null){
-                            tableauCase[i][j].setItem(new Mousquet());
-                            nombreMousquetRestante--;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void generateArmureIntoPlateau(int nbJoueur){
-        int nombreArmureRestante=2*nbJoueur;
-        Random random=new Random();
-        while(nombreArmureRestante !=0){
-            for (int i = 0; i < cote; i++) {
-                for (int j = 0; j < cote; j++) {
-                    int randomNumberItem=random.nextInt(cote*cote);
-                    if (randomNumberItem >=0 && randomNumberItem<=nbJoueur*2-1 && nombreArmureRestante !=0 && tableauCase[i][j].getType() !=1){
-                        if (tableauCase[i][j].getItem()==null){
-                            tableauCase[i][j].setItem(new Armure());
-                            nombreArmureRestante--;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void generateJoueurIntoPlateau(int nbJoueur){
-        int nombreJoueurRestante=nbJoueur;
-        Random random=new Random();
 
-        while(nombreJoueurRestante !=0){
-            for (int i = 0; i < cote; i++) {
-                for (int j = 0; j < cote; j++) {
-                    int randomNumberJoueur=random.nextInt(returnNumberCaseNormalWithoutItem());
-                    if (randomNumberJoueur >=0 && randomNumberJoueur<=nbJoueur-1 && nombreJoueurRestante !=0 && tableauCase[i][j].getType() !=0){
-                        if (tableauCase[i][j].getItem()==null){
-                            //tableauCase[i][j].setItem(new Corsaire());
-                            nombreJoueurRestante--;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    private int returnNumberCaseNormalWithoutItem(){
-        int compteurCaseNormalWithoutItem=0;
-        for (int i = 0; i < cote; i++) {
-            for (int j = 0; j < cote; j++) {
-                if(tableauCase[i][j].getItem()==null && tableauCase[i][j].getType()==0){
-                    compteurCaseNormalWithoutItem++;
-                }
-            }
-        }
-        return compteurCaseNormalWithoutItem;
-    }
     private boolean verificationCase(Case caseAVerifier,Corsaire joueur){
         if(caseAVerifier==null){
             return false;

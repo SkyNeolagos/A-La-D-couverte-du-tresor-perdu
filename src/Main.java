@@ -12,18 +12,16 @@ public class Main {
 		System.out.println("-------------------");
 		System.out.println("-----Test Loic-----");
 		Plateau plateau=new Plateau(cote);
-		plateau.setCote(cote);
-		plateau.setTableauCase(plateau.generatePlateauWithoutItem());
-		plateau.generatePelleIntoPlateau(4);
-		plateau.generateMachetteIntoPlateau(4);
-		plateau.generateMousquetIntoPlateau(4);
-		plateau.generateArmureIntoPlateau(4);
+		plateau.initialiser(4);
 		plateau.affichage();
 		System.out.println("-------------------");
 		for (int i = 0; i <cote ; i++) {
 			for (int j = 0; j <cote ; j++) {
 				if(plateau.getTableauCase()[i][j].getItem()!=null){
 					System.out.print(plateau.getTableauCase()[i][j].getItem().getType());
+				}
+				else if(plateau.getTableauCase()[i][j].isHaveChest()){
+					System.out.print("C");
 				}
 				else{
 					System.out.print(4);
