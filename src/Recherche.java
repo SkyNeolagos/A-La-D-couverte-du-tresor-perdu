@@ -1,5 +1,5 @@
 public class Recherche {
-    private Case find(int x,int y,Plateau plateau,int cote){
+    protected Case find(int x,int y,Plateau plateau,int cote){
         if((x<0 || y<0) || (x>cote || y>cote)){
             return null;
         }
@@ -17,7 +17,7 @@ public class Recherche {
             return null;
         }
     }
-    public Case findTop(Case positionActuelle,Plateau plateau){
+    protected Case findTop(Case positionActuelle,Plateau plateau){
         int cote=plateau.getCote();
         if(positionActuelle!=null){
             int tmpX=positionActuelle.getX()-1;
@@ -31,7 +31,7 @@ public class Recherche {
         }
         return null;
     }
-    public Case findBot(Case positionActuelle,Plateau plateau){
+    protected Case findBot(Case positionActuelle,Plateau plateau){
         int cote=plateau.getCote();
         if(positionActuelle!=null){
             int tmpX=positionActuelle.getX()+1;
@@ -45,7 +45,7 @@ public class Recherche {
         }
         return null;
     }
-    public Case findRight(Case positionActuelle,Plateau plateau){
+    protected Case findRight(Case positionActuelle,Plateau plateau){
         int cote=plateau.getCote();
         if(positionActuelle!=null){
             int tmpX=positionActuelle.getX();
@@ -59,7 +59,7 @@ public class Recherche {
         }
         return null;
     }
-    public Case findLeft(Case positionActuelle,Plateau plateau){
+    protected Case findLeft(Case positionActuelle,Plateau plateau){
         int cote=plateau.getCote();
         if(positionActuelle!=null){
             int tmpX=positionActuelle.getX();
@@ -73,22 +73,22 @@ public class Recherche {
         }
         return null;
     }
-    public Case findTopLeft(Case positionActuelle,Plateau plateau){
+    protected Case findTopLeft(Case positionActuelle,Plateau plateau){
         Case tmpCase=findTop(positionActuelle,plateau);
         tmpCase=findLeft(tmpCase,plateau);
         return tmpCase;
     }
-    public Case findTopRight(Case positionActuelle,Plateau plateau){
+    protected Case findTopRight(Case positionActuelle,Plateau plateau){
         Case tmpCase=findTop(positionActuelle,plateau);
         tmpCase=findRight(tmpCase,plateau);
         return tmpCase;
     }
-    public Case findBotLeft(Case positionActuelle,Plateau plateau){
+    protected Case findBotLeft(Case positionActuelle,Plateau plateau){
         Case tmpCase=findBot(positionActuelle,plateau);
         tmpCase=findLeft(tmpCase,plateau);
         return tmpCase;
     }
-    public Case findBotRight(Case positionActuelle,Plateau plateau){
+    protected Case findBotRight(Case positionActuelle,Plateau plateau){
         Case tmpCase=findBot(positionActuelle,plateau);
         tmpCase=findRight(tmpCase,plateau);
         return tmpCase;
