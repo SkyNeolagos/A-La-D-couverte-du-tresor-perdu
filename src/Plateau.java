@@ -9,6 +9,7 @@ public class Plateau {
     private Case[][] tableauCase;
     private ArrayList<Corsaire> listeCorsaire;
     private ArrayList<Pirate> listePirate;
+    private SystemeDeTour systemeDeTour;
 
     Plateau(int cote) {
         this.cote=cote;
@@ -17,6 +18,7 @@ public class Plateau {
         this.nombreCaseForet=((5*nombreCaseTotal)/100);
         listeCorsaire=new ArrayList<Corsaire>();
         listePirate=new ArrayList<Pirate>();
+        systemeDeTour=new SystemeDeTour();
         tableauCase=generatePlateauWithoutItem();
     }
     void affichage() {
@@ -33,8 +35,8 @@ public class Plateau {
     public boolean sauvegarde() {
         return false;
     }
-    public Plateau tourJoueur(Plateau plateau) {
-        return plateau;
+    public void tourJoueur() {
+        systemeDeTour.tourJoueur(this);
     }
     public Plateau tourPirate(Plateau plateau) {
         return plateau;
@@ -135,20 +137,21 @@ public class Plateau {
             }
         }
     }
-    private boolean verificationDeplacement(String evenement, Corsaire joueur){
+    protected boolean verificationDeplacement(String evenement, Corsaire joueur){
         Case tmpCase;
         Recherche recherche=new Recherche();
         switch(evenement){
-            case "top":
+            case "8":
                 tmpCase = recherche.findTop(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
-            case "bot":
+            case "2":
                 tmpCase = recherche.findBot(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
-            case "left":
+            case "4":
                 tmpCase = recherche.findLeft(joueur.getEmplacement(),this);
+                System.out.println(tmpCase);
                 return verificationCase(tmpCase,joueur);
-            case "right":
+            case "6":
                 tmpCase = recherche.findRight(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             case "topLeft":
