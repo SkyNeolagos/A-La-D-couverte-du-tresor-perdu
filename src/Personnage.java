@@ -1,19 +1,18 @@
 public abstract class Personnage {
-    private int id;
     private int type;
     private int portee;
     private int pointDeplacement;
     private Case emplacement;
-    
 
-    public Personnage(int id, int type, int portee, int pointDeplacement, Case emplacement) {
-		this.id = id;
+
+    public Personnage(int type, int portee, int pointDeplacement, Case emplacement) {
 		this.type = type;
 		this.portee = portee;
 		this.pointDeplacement = pointDeplacement;
 		this.emplacement = emplacement;
 	}
-	public Personnage(){
+	public Personnage(Case emplacement){
+    	this.emplacement=emplacement;
 	};
 
 
@@ -27,15 +26,6 @@ public abstract class Personnage {
     	return true;
     }
 
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 
 	public int getType() {
