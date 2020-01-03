@@ -37,7 +37,7 @@ public class Corsaire extends Personnage {
     		boolean possedeObject = false;
     		// Parcours inventaire
 			for (int i = 0; i < inventaire.length; i++) { 
-				// Si objet dans inventaire = � objet trouv�e
+				// Si objet dans inventaire = objet trouve
 				if (inventaire[i].getType() == newPosition.getItem().getType()) {
 					possedeObject = true;
 					break;
@@ -46,18 +46,15 @@ public class Corsaire extends Personnage {
 			// Si il ne possede pas l'objet
 			if (possedeObject == false) { 
 				// Ajout de l'objet dans l'inventaire
-				inventaire[inventaire.length+1] = newPosition.getItem(); 
+				addItem(newPosition.getItem());
+				newPosition.setItem(null);
 			}
 		}
     	// Creuser si possible
     	if (!newPosition.isDig()) {
-    		for (int y = 0; y < inventaire.length; y++) {
-    			//Si il as une pelle
-				if (inventaire[y].getType() == 1 ) { 
-					dig();// la boucle a mettre dans la fonction dig() si on fais passer un argument a cette derniere
-					if(newPosition.isDig() && newPosition.isHaveChest()) {
-						// VICTOIRE
-					}
+    		if (inventaire[0] != null && inventaire[0] instanceof Pelle) {
+    			if(newPosition.isDig() && newPosition.isHaveChest()) {
+					// VICTOIRE
 				}
 			}
 		}
