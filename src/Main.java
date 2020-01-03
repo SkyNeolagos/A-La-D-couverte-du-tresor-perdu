@@ -15,20 +15,7 @@ public class Main {
 		plateau.initialiser(4);
 		plateau.affichage();
 		System.out.println("-------------------");
-		for (int i = 0; i <cote ; i++) {
-			for (int j = 0; j <cote ; j++) {
-				if(plateau.getTableauCase()[i][j].getItem()!=null){
-					System.out.print(plateau.getTableauCase()[i][j].getItem().getType());
-				}
-				else if(plateau.getTableauCase()[i][j].isHaveChest()){
-					System.out.print("C");
-				}
-				else{
-					System.out.print(4);
-				}
-			}
-			System.out.println();
-		}
+		plateau.tourJoueur();
 		System.out.println("-------------------");
 	}
 	
