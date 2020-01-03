@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.jar.JarEntry;
 
@@ -6,18 +7,18 @@ public class Plateau {
     private int nombreCaseEau;
     private int nombreCaseForet;
     private Case[][] tableauCase;
-    private Corsaire[] tableauJoueur;
-    private Pirate[] tableauPirate;
-    private Generator generator;
+    private ArrayList<Corsaire> listeCorsaire;
+    private ArrayList<Pirate> listePirate;
 
     Plateau(int cote) {
         this.cote=cote;
         int nombreCaseTotal=cote*cote;
         this.nombreCaseEau=((5*nombreCaseTotal)/100);
         this.nombreCaseForet=((5*nombreCaseTotal)/100);
+        listeCorsaire=new ArrayList<Corsaire>();
+        listePirate=new ArrayList<Pirate>();
         tableauCase=generatePlateauWithoutItem();
     }
-
     void affichage() {
         for(int i=0; i<cote; i++)
         {
@@ -41,8 +42,9 @@ public class Plateau {
     public Plateau charger(Plateau plateau) {
         return plateau;
     }
+
     public void initialiser(int nbJoueur) {
-        generator=new Generator();
+        Generator generator = new Generator();
         generator.generatePelleIntoPlateau(nbJoueur,this);
         generator.generateArmureIntoPlateau(nbJoueur,this);
         generator.generateMachetteIntoPlateau(nbJoueur,this);
@@ -52,7 +54,6 @@ public class Plateau {
         generator.generateFlibustierIntoPlateau(nbJoueur,this);
         generator.generateBoucanierIntoPlateau(nbJoueur,this);
     }
-
     Case [][] generatePlateauWithoutItem(){
         Case [][] plateauWithoutItem=new Case[cote][cote];
         int nombreCaseTotal=cote*cote;
@@ -179,16 +180,16 @@ public class Plateau {
     public void setTableauCase(Case[][] tableauCase) {
         this.tableauCase = tableauCase;
     }
-    public Corsaire[] getTableauJoueur() {
-        return tableauJoueur;
+    public ArrayList<Corsaire> getListeCorsaire() {
+        return listeCorsaire;
     }
-    public void setTableauJoueur(Corsaire[] tableauJoueur) {
-        this.tableauJoueur = tableauJoueur;
+    public void setListeCorsaire(ArrayList<Corsaire> listeCorsaire) {
+        this.listeCorsaire = listeCorsaire;
     }
-    public Pirate[] getTableauPirate() {
-        return tableauPirate;
+    public ArrayList<Pirate> getListePirate() {
+        return listePirate;
     }
-    public void setTableauPirate(Pirate[] tableauPirate) {
-        this.tableauPirate = tableauPirate;
+    public void setListePirate(ArrayList<Pirate> listePirate) {
+        this.listePirate = listePirate;
     }
 }

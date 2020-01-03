@@ -71,6 +71,7 @@ public class Generator {
     }
     protected void generateJoueurIntoPlateau(int nbJoueur,Plateau plateau){
         int nombreJoueurRestant=nbJoueur;
+        int numeroJoueur=1;
         Random random=new Random();
         while(nombreJoueurRestant !=0){
             for (int i = 0; i < plateau.getCote(); i++) {
@@ -78,8 +79,11 @@ public class Generator {
                     int randomNumberJoueur=random.nextInt(returnNumberCaseNormalWithoutItemOrCorsaire(plateau));
                     if (randomNumberJoueur >=0 && randomNumberJoueur<=nbJoueur-1 && nombreJoueurRestant !=0 && plateau.getTableauCase()[i][j].getType() ==0){
                         if (plateau.getTableauCase()[i][j].getItem()==null){
-                            plateau.getTableauCase()[i][j].setPersonnage(new Corsaire());
+                            Corsaire tmp=new Corsaire(plateau.getTableauCase()[i][j],numeroJoueur);
+                            plateau.getTableauCase()[i][j].setPersonnage(tmp);
+                            plateau.getListeCorsaire().add(tmp);
                             nombreJoueurRestant--;
+                            numeroJoueur++;
                         }
                     }
                 }
@@ -112,8 +116,10 @@ public class Generator {
                     int randomNumberPirate=random.nextInt(plateau.getCote()*plateau.getCote());
                     if (randomNumberPirate>=0 && randomNumberPirate<=nbJoueur-1 && nombreFlibustierRestant !=0 && plateau.getTableauCase()[i][j].getType()!=1){
                         if(plateau.getTableauCase()[i][j].getPersonnage()==null){
-                            plateau.getTableauCase()[i][j].setPersonnage(new Flibustier());
+                            Flibustier tmp=new Flibustier(plateau.getTableauCase()[i][j]);
+                            plateau.getTableauCase()[i][j].setPersonnage(tmp);
                             nombreFlibustierRestant--;
+                            plateau.getListePirate().add(tmp);
                         }
                     }
                 }
@@ -129,7 +135,9 @@ public class Generator {
                     int randomNumberPirate=random.nextInt(plateau.getCote()*plateau.getCote());
                     if (randomNumberPirate>=0 && randomNumberPirate<=nbJoueur-1 && nombreBoucanierRestant !=0 && plateau.getTableauCase()[i][j].getType()!=1){
                         if(plateau.getTableauCase()[i][j].getPersonnage()==null){
-                            plateau.getTableauCase()[i][j].setPersonnage(new Boucanier());
+                            Boucanier tmp=new Boucanier(plateau.getTableauCase()[i][j]);
+                            plateau.getTableauCase()[i][j].setPersonnage(tmp);
+                            plateau.getListePirate().add(tmp);
                             nombreBoucanierRestant--;
                         }
                     }

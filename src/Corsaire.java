@@ -7,23 +7,21 @@ public class Corsaire extends Personnage {
     
     
     // --CONSTRUCTEUR--
-    public Corsaire(int id, int type, int portee, int pointDeplacement, Case emplacement, Item[] inventaire, int chance,
-			int joueur, boolean haveChest) {
-		super(id, type, portee, pointDeplacement, emplacement);
-		this.inventaire = inventaire;
-		this.chance = chance;
-		this.numeroJoueur = joueur;
-		this.haveChest = haveChest;
+    public Corsaire(Case emplacement, int numeroJoueur) {
+		super(0, 1, 1, emplacement);
+		this.inventaire = new Item[4];
+		this.chance = 0;
+		this.numeroJoueur = numeroJoueur;
+		this.haveChest = false;
 	}
-	public Corsaire(){}
-    
+
     // COUCOU MIKA, KDO c'est pour toi
-    
+
     public void addItem(Item item) {
 		// Faut ajouter l'item a l'inventaire au bon emplacement.
     	// Genre
-    	
-    	inventaire[item.getType()] = item;
+    	//0->Pelle 1->Machette 2->Mousquet 3->Armure
+    	this.inventaire[item.getType()] = item;
     	
     	// En faite je crois que c'est carrement ca enfaite
 	}
