@@ -15,8 +15,8 @@ public class SystemeDeTour {
             if(i.isHaveChest()){
                 System.out.println("Victoire du joueur: "+i.getNumeroJoueur());
             }
+            plateau.affichage();
         }
-        plateau.affichage();
     }
     private String choixDirectionDeplacement(Corsaire joueur){
         Scanner scan=new Scanner(System.in);
