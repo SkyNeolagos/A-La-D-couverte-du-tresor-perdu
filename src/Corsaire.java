@@ -35,13 +35,17 @@ public class Corsaire extends Personnage {
     	// Ramasser object
     	if (newPosition.getItem() != null) {
     		boolean possedeObject = false;
-    		// Parcours inventaire
-			for (int i = 0; i < inventaire.length; i++) { 
-				// Si objet dans inventaire = objet trouve
-				if (inventaire[i].getType() == newPosition.getItem().getType()) {
-					possedeObject = true;
-					break;
-				}
+    		if (newPosition.getItem() instanceof Pelle && inventaire[0] != null) {
+				possedeObject = true;
+			}
+    		else if (newPosition.getItem() instanceof Machette && inventaire[1] != null) {
+    			possedeObject = true;
+			}
+    		else if (newPosition.getItem() instanceof Mousquet && inventaire[2] != null) {
+    			possedeObject = true;
+			}
+    		else if (newPosition.getItem() instanceof Armure && inventaire[3] != null) {
+    			possedeObject = true;
 			}
 			// Si il ne possede pas l'objet
 			if (possedeObject == false) { 
