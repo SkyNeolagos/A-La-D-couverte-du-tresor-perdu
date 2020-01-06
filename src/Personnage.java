@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Personnage {
     private int type;
     private int portee;
@@ -19,13 +21,22 @@ public abstract class Personnage {
 	public boolean combat(Personnage ennemi) {
 		if(this instanceof Corsaire){
 			int chance=((Corsaire) this).getChance();
-
+			Random random = new Random();
+			int resultatCombat=random.nextInt(100);
+			if(resultatCombat >=0 && resultatCombat < chance-1) {
+				return true;
+			}
 		}
-		else{
-
+		else if(this instanceof Pirate){
+			int chance=((Corsaire) ennemi).getChance();
+			Random random = new Random();
+			int resultatCombat=random.nextInt(100);
+			if(resultatCombat >=0 && resultatCombat < chance-1) {
+				return true;
+			}
 		}
-        return false;
-    }
+		return false;
+	}
 
     public boolean deplacement(Case newPosition) {
     	this.emplacement = newPosition;

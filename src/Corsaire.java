@@ -1,4 +1,3 @@
-
 public class Corsaire extends Personnage {
     private Item[] inventaire;
     private int chance;
@@ -14,9 +13,29 @@ public class Corsaire extends Personnage {
 		this.numeroJoueur = numeroJoueur;
 		this.haveChest = false;
 	}
-
+    
+    public void updateChance() {
+		for (int i = 1; i < inventaire.length; i++) {
+			ItemCombat itemCombat = (ItemCombat) inventaire[i];
+			if (inventaire[2] != null && inventaire[3] != null) {
+				chance = 100;
+			}
+			else if (inventaire[2] != null) {
+				chance = 90;
+			}
+			else if (inventaire[1] != null) {
+				chance = 40;
+			}  
+			else if (inventaire[3] != null) {
+				chance = 10;
+			}
+			else chance = 0;
+		}
+	}
+    
     public void addItem(Item item) {
     	this.inventaire[item.getType()] = item;
+    	updateChance();
 	}
 
 	public boolean deplacement(Case newPosition) {
