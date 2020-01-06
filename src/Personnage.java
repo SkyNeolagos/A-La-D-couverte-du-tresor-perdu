@@ -16,8 +16,14 @@ public abstract class Personnage {
 	};
 
 
-	public boolean combat() {
-		// A faire
+	public boolean combat(Personnage ennemi) {
+		if(this instanceof Corsaire){
+			int chance=((Corsaire) this).getChance();
+
+		}
+		else{
+
+		}
         return false;
     }
 

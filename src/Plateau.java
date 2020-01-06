@@ -118,17 +118,27 @@ public class Plateau {
         if(caseAVerifier==null){
             return false;
         }
-        else{
+        else if(caseAVerifier.getPersonnage()!=null && caseAVerifier.getPersonnage() instanceof Pirate){
+            if(joueur.combat(caseAVerifier.getPersonnage())){
+                return false;
+            }
+            return false;
+        }
+        else if(caseAVerifier.getPersonnage()==null){
             if(caseAVerifier.getType()==1){
                 return false;
             }
             else if(caseAVerifier.getType()==0){
+                joueur.getEmplacement().setPersonnage(null);
                 joueur.deplacement(caseAVerifier);
+                caseAVerifier.setPersonnage(joueur);
                 return true;
             }
             else{
                 if(caseAVerifier.getType()==2 && joueur.getInventaire()[1]!=null){
+                    joueur.getEmplacement().setPersonnage(null);
                     joueur.deplacement(caseAVerifier);
+                    caseAVerifier.setPersonnage(joueur);
                     return  true;
                 }
                 else{
@@ -136,6 +146,7 @@ public class Plateau {
                 }
             }
         }
+        return false;
     }
     protected boolean verificationDeplacement(String evenement, Corsaire joueur){
         Case tmpCase;

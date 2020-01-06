@@ -6,15 +6,17 @@ public class SystemeDeTour {
         ArrayList<Corsaire> listeTmpJoueur;
         listeTmpJoueur=plateau.getListeCorsaire();
         for (Corsaire i: listeTmpJoueur) {
-            boolean joueurSuivant=true;
             String choix=choixDirectionDeplacement(i);
-            joueurSuivant=plateau.verificationDeplacement(choix,i);
+            boolean joueurSuivant=plateau.verificationDeplacement(choix,i);
             while(!joueurSuivant){
                 choix=choixDirectionDeplacement(i);
                 joueurSuivant=plateau.verificationDeplacement(choix,i);
             }
+            if(i.isHaveChest()){
+                System.out.println("Victoire du joueur: "+i.getNumeroJoueur());
+            }
+            plateau.affichage();
         }
-        plateau.affichage();
     }
     private String choixDirectionDeplacement(Corsaire joueur){
         Scanner scan=new Scanner(System.in);

@@ -15,21 +15,11 @@ public class Corsaire extends Personnage {
 		this.haveChest = false;
 	}
 
-    // COUCOU MIKA, KDO c'est pour toi
-
     public void addItem(Item item) {
-		// Faut ajouter l'item a l'inventaire au bon emplacement.
-    	// Genre
-    	//0->Pelle 1->Machette 2->Mousquet 3->Armure
     	this.inventaire[item.getType()] = item;
-    	
-    	// En faite je crois que c'est carrement ca enfaite
 	}
-    
-    // --DEPLACEMENT--
+
 	public boolean deplacement(Case newPosition) {
-		
-		// Changement de position
     	this.setEmplacement(newPosition);
     	
     	// Ramasser object
