@@ -1,5 +1,7 @@
 public class Main {
 	public static void main(String[] args) {
+		SauvegardePlateau sauvegardePlateau = new SauvegardePlateau();
+		
 		System.out.println("Hello World");
 		Case testCase = new Case(2, true, null, 3, 4);
 		testCase.affichage();
@@ -15,8 +17,11 @@ public class Main {
 		plateau.initialiser(4);
 		plateau.affichage();
 		System.out.println("-------------------");
-		plateau.tourJoueur();
+		//plateau.tourJoueur();
 		System.out.println("-------------------");
+		System.out.println("-----Test BG-----");
+		sauvegardePlateau.sauvegarderPlateau(plateau);
+		
 	}
 	
 	
