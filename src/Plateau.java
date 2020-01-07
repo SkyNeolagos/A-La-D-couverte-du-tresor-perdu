@@ -120,8 +120,20 @@ public class Plateau {
         }
         else if(caseAVerifier.getPersonnage()!=null && caseAVerifier.getPersonnage() instanceof Pirate){
             if(joueur.combat(caseAVerifier.getPersonnage())){
+                joueur.getEmplacement().setPersonnage(null);
+                joueur.deplacement(caseAVerifier);
+                listePirate.removeIf(i -> i == caseAVerifier.getPersonnage());
+                caseAVerifier.setPersonnage(joueur);
+                return true;
+                }
+            else if(!joueur.combat(caseAVerifier.getPersonnage())){
+                joueur.getEmplacement().setPersonnage(null);
+                listeCorsaire.removeIf(i -> i == joueur);
+                System.out.println("You are mort");
                 return false;
             }
+        }
+        else if(caseAVerifier.getPersonnage()!=null && caseAVerifier.getPersonnage() instanceof Corsaire){
             return false;
         }
         else if(caseAVerifier.getPersonnage()==null){
@@ -160,21 +172,20 @@ public class Plateau {
                 return verificationCase(tmpCase,joueur);
             case "4":
                 tmpCase = recherche.findLeft(joueur.getEmplacement(),this);
-                System.out.println(tmpCase);
                 return verificationCase(tmpCase,joueur);
             case "6":
                 tmpCase = recherche.findRight(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
-            case "topLeft":
+            case "7":
                 tmpCase = recherche.findTopLeft(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
-            case "topRight":
+            case "9":
                 tmpCase = recherche.findTopRight(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
-            case "botLeft":
+            case "1":
                 tmpCase = recherche.findBotLeft(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
-            case "botRight":
+            case "3":
                 tmpCase = recherche.findBotRight(joueur.getEmplacement(),this);
                 return verificationCase(tmpCase,joueur);
             default:

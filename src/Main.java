@@ -15,6 +15,12 @@ public class Main {
 		System.out.println("-----Test Loic-----");
 		Plateau plateau=new Plateau(cote);
 		plateau.initialiser(4);
+		for (int i = 0; i < cote ; i++) {
+			for (int j = 0; j < cote; j++) {
+				System.out.print(plateau.getTableauCase()[i][j].getType());
+			}
+			System.out.println();
+		}
 		plateau.affichage();
 		System.out.println("-------------------");
 		plateau.tourJoueur();

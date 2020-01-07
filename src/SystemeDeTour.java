@@ -3,17 +3,22 @@ import java.util.Scanner;
 
 public class SystemeDeTour {
     public void tourJoueur(Plateau plateau){
-        ArrayList<Corsaire> listeTmpJoueur;
-        listeTmpJoueur=plateau.getListeCorsaire();
-        for (Corsaire i: listeTmpJoueur) {
+        for (Corsaire i: plateau.getListeCorsaire()) {
             String choix=choixDirectionDeplacement(i);
             boolean joueurSuivant=plateau.verificationDeplacement(choix,i);
             while(!joueurSuivant){
-                choix=choixDirectionDeplacement(i);
-                joueurSuivant=plateau.verificationDeplacement(choix,i);
+                if(!plateau.getListeCorsaire().contains(i)){
+                    joueurSuivant=true;
+                }
+                else{
+                    choix=choixDirectionDeplacement(i);
+                    joueurSuivant=plateau.verificationDeplacement(choix,i);
+                }
             }
-            if(i.isHaveChest()){
-                System.out.println("Victoire du joueur: "+i.getNumeroJoueur());
+            if(plateau.getListeCorsaire().contains(i)){
+                if(i.isHaveChest()){
+                    System.out.println("Victoire du joueur: "+i.getNumeroJoueur());
+                }
             }
             plateau.affichage();
         }

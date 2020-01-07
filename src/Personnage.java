@@ -21,6 +21,9 @@ public abstract class Personnage {
 	public boolean combat(Personnage ennemi) {
 		if(this instanceof Corsaire){
 			int chance=((Corsaire) this).getChance();
+			if(chance==0){
+				return false;
+			}
 			Random random = new Random();
 			int resultatCombat=random.nextInt(100);
 			if(resultatCombat >=0 && resultatCombat < chance-1) {
@@ -29,6 +32,9 @@ public abstract class Personnage {
 		}
 		else if(this instanceof Pirate){
 			int chance=((Corsaire) ennemi).getChance();
+			if(chance==0){
+				return false;
+			}
 			Random random = new Random();
 			int resultatCombat=random.nextInt(100);
 			if(resultatCombat >=0 && resultatCombat < chance-1) {
