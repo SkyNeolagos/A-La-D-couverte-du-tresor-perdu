@@ -7,6 +7,7 @@ public class Plateau {
     private int nombreCaseEau;
     private int nombreCaseForet;
     private Case[][] tableauCase;
+    private int nbJoueur;
     private ArrayList<Corsaire> listeCorsaire;
     private ArrayList<Pirate> listePirate;
     private SystemeDeTour systemeDeTour;
@@ -217,4 +218,20 @@ public class Plateau {
     public void setListePirate(ArrayList<Pirate> listePirate) {
         this.listePirate = listePirate;
     }
+	public int getNombreCaseEau() {
+		return nombreCaseEau;
+	}
+	public void setNombreCaseEau(int nombreCaseEau) {
+		this.nombreCaseEau = nombreCaseEau;
+	}
+	public int getNombreCaseForet() {
+		return nombreCaseForet;
+	}
+	public void setNombreCaseForet(int nombreCaseForet) {
+		this.nombreCaseForet = nombreCaseForet;
+	}
+	public int getNbJoueur() {
+		return this.nbJoueur;
+	}
+    
 }
