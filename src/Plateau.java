@@ -47,6 +47,7 @@ public class Plateau {
     }
 
     public void initialiser(int nbJoueur) {
+        this.nbJoueur=nbJoueur;
         Generator generator = new Generator();
         generator.generatePelleIntoPlateau(nbJoueur,this);
         generator.generateArmureIntoPlateau(nbJoueur,this);

@@ -25,10 +25,10 @@ public class Main {
 		}
 		plateau.affichage();
 		System.out.println("-------------------");
-		//plateau.tourJoueur();
+		plateau.tourJoueur();
 		System.out.println("-------------------");
 		System.out.println("-----Test BG-----");
-		sauvegardePlateau.sauvegarderPlateau(plateau);
+		//sauvegardePlateau.sauvegarderPlateau(plateau);
 		
 	}
 	
