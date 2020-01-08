@@ -3,25 +3,31 @@ import java.util.Scanner;
 
 public class SystemeDeTour {
     public void tourJoueur(Plateau plateau){
-        for (Corsaire i: plateau.getListeCorsaire()) {
-            String choix=choixDirectionDeplacement(i);
-            boolean joueurSuivant=plateau.verificationDeplacement(choix,i);
+        int nbJoueur=plateau.getNbJoueur();
+        int i=0;
+        while(i<nbJoueur || plateau.getListeCorsaire().isEmpty()){
+            System.out.println(i);
+            Corsaire verifCorsaire = plateau.getListeCorsaire().get(i);
+            Corsaire corsaireTmp =verifCorsaire;
+            String choix=choixDirectionDeplacement(corsaireTmp);
+            boolean joueurSuivant=plateau.verificationDeplacement(choix,corsaireTmp);
             while(!joueurSuivant){
-                if(!plateau.getListeCorsaire().contains(i)){
+                if(!plateau.getListeCorsaire().contains(verifCorsaire)){
                     joueurSuivant=true;
                 }
                 else{
-                    choix=choixDirectionDeplacement(i);
-                    joueurSuivant=plateau.verificationDeplacement(choix,i);
+                    choix=choixDirectionDeplacement(corsaireTmp);
+                    joueurSuivant=plateau.verificationDeplacement(choix,corsaireTmp);
                 }
             }
-            if(plateau.getListeCorsaire().contains(i)){
-                if(i.isHaveChest()){
-                    System.out.println("Victoire du joueur: "+i.getNumeroJoueur());
+            if(plateau.getListeCorsaire().contains(verifCorsaire)){
+                if(corsaireTmp.isHaveChest()){
+                    System.out.println("Victoire du joueur: "+corsaireTmp.getNumeroJoueur());
                 }
             }
             plateau.affichage();
         }
+
     }
     private String choixDirectionDeplacement(Corsaire joueur){
         Scanner scan=new Scanner(System.in);
