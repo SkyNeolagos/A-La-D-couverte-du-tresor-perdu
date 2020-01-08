@@ -2,33 +2,12 @@ import java.util.ArrayList;
 
 public class Main {
 	public static void main(String[] args) {
-		SauvegardePlateau sauvegardePlateau = new SauvegardePlateau();
-		
-		System.out.println("Hello World");
-		Case testCase = new Case(2, true, null, 3, 4);
-		testCase.affichage();
-		System.out.println();
-
-		//Test LOIC
-
-        Case[][] tableauCase;
         int cote=6;
-		System.out.println("-------------------");
-		System.out.println("-----Test Loic-----");
+		System.out.println("Les touches pour les direction sont celles du pavé numérique,2 vers le bas,6 vers la droit, etc ");
 		Plateau plateau=new Plateau(cote);
 		plateau.initialiser(4);
-		for (int i = 0; i < cote ; i++) {
-			for (int j = 0; j < cote; j++) {
-				System.out.print(plateau.getTableauCase()[i][j].getType());
-			}
-			System.out.println();
-		}
 		plateau.affichage();
-		System.out.println("-------------------");
 		plateau.tourJoueur();
-		System.out.println("-------------------");
-		System.out.println("-----Test BG-----");
-		//sauvegardePlateau.sauvegarderPlateau(plateau);
 		
 	}
 	

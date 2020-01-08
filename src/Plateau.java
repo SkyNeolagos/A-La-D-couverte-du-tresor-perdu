@@ -121,7 +121,8 @@ public class Plateau {
             return false;
         }
         else if(caseAVerifier.getPersonnage()!=null && caseAVerifier.getPersonnage() instanceof Pirate){
-            if(joueur.combat(caseAVerifier.getPersonnage())){
+            return false;
+            /*if(joueur.combat(caseAVerifier.getPersonnage())){
                 joueur.getEmplacement().setPersonnage(null);
                 joueur.deplacement(caseAVerifier);
                 listePirate.removeIf(i -> i == caseAVerifier.getPersonnage());
@@ -133,7 +134,7 @@ public class Plateau {
                 listeCorsaire.removeIf(i -> i == joueur);
                 System.out.println("You are mort");
                 return false;
-            }
+            }*/
         }
         else if(caseAVerifier.getPersonnage()!=null && caseAVerifier.getPersonnage() instanceof Corsaire){
             return false;
